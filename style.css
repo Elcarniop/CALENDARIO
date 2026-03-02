@@ -1,0 +1,81 @@
+body {
+        margin: 0;
+        font-family: "Arial Black", sans-serif;
+        background-color: #1b1b1b;
+        color: #000;
+        display: flex;
+        flex-direction: column;
+        min-height: 100vh;
+      }
+
+      /* Encabezado rojo superior */
+      header {
+        background-color: #b50303;
+        color: white;
+        padding: 20px 40px;
+        font-size: 1.8em;
+        font-weight: bold;
+      }
+
+      header span {
+        color: #fff;
+      }
+
+      /* Sección principal */
+      main {
+        flex: 1;
+        background-color: #f8f8f8;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        padding: 50px 20px;
+      }
+
+      main h1 {
+        font-size: 2em;
+        margin-bottom: 30px;
+      }
+
+      /* Botones */
+      .buttons {
+        display: flex;
+        gap: 20px;
+      }
+
+      .btn {
+        padding: 15px 35px;
+        font-size: 1em;
+        border: none;
+        border-radius: 5px;
+        font-weight: bold;
+        cursor: pointer;
+        transition: 0.3s;
+      }
+
+      .btn-black {
+        background-color: #000;
+        color: white;
+      }
+
+      .btn-black:hover {
+        background-color: #333;
+      }
+
+      .btn-red {
+        background-color: #b50303;
+        color: white;
+      }
+
+      .btn-red:hover {
+        background-color: #d41616;
+      }
+
+      /* Pie de página */
+      footer {
+        background-color: #000;
+        color: white;
+        text-align: center;
+        padding: 10px 0;
+        font-size: 0.9em;
+      }
