@@ -1,0 +1,118 @@
+<!doctype html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Calendario</title>
+    <style>
+      /* Estilos generales */
+    body {
+        margin: 0;
+        font-family: "Arial Black", sans-serif;
+        background-color: #1b1b1b;
+        color: #000;
+        display: flex;
+        flex-direction: column;
+        min-height: 100vh;
+    }
+
+      /* Encabezado rojo superior */
+    header {
+        background-color: #b50303;
+        color: white;
+        padding: 20px 40px;
+        font-size: 1.8em;
+        font-weight: bold;
+    }
+
+    header span {
+        color: #fff;
+    }
+
+      /* Sección principal */
+    main {
+        flex: 1;
+        background-color: #f8f8f8;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        padding: 50px 20px;
+    }
+
+    main h1 {
+        font-size: 2em;
+        margin-bottom: 30px;
+    }
+
+      /* Botones */
+    .buttons {
+        display: flex;
+        gap: 20px;
+    }
+
+    .btn {
+        padding: 15px 35px;
+        font-size: 1em;
+        border: none;
+        border-radius: 5px;
+        font-weight: bold;
+        cursor: pointer;
+        transition: 0.3s;
+    }
+
+    .btn-black {
+        background-color: #000;
+        color: white;
+    }
+
+    .btn-black:hover {
+        background-color: #333;
+    }
+
+    .btn-red {
+        background-color: #b50303;
+        color: white;
+    }
+
+    .btn-red:hover {
+        background-color: #d41616;
+    }
+
+      /* Pie de página */
+    footer {
+        background-color: #000;
+        color: white;
+        text-align: center;
+        padding: 10px 0;
+        font-size: 0.9em;
+    }
+    </style>
+    <script>
+    function mostrarMensaje() {
+        alert("Redirigiendo al index...");
+        window.location.href = "index.html";
+    }
+    </script>
+</head>
+<body>
+    <header>
+    <span>VIVE EL CAMPUS</span>
+    </header>
+
+    <main>
+    <h1>VIVE EL CAMPUS</h1>
+    <h2>CALENDARIO</h2>
+    <div class="buttons">
+        <a href="index.html">
+        <button class="btn btn-black">ACTIVIDADES Y CALENDARIO</button>
+        </a>
+        <a href="inicio.html">
+        <button class="btn btn-red">INICIO SESSION</button>
+        </a>
+    </div>
+    </main>
+
+    <footer>Universidad Libre © 2025</footer>
+</body>
+</html>
