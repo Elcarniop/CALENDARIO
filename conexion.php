@@ -1,26 +1,19 @@
 <?php
-// ============================================================
-// config.php — Conexión a la BD "sistema"
-// ============================================================
-
-define('DB_HOST',   'localhost');
-define('DB_USER',   'root');    // Cambia si tu usuario MySQL es otro
-define('DB_PASS',   '');        // Cambia si tienes contraseña MySQL
-define('DB_NAME',   'calendario'); // Tu BD se llama "sistema"
-define('DB_CHARSET','utf8mb4');
+define('DB_HOST',    'localhost');
+define('DB_USER',    'root');
+define('DB_PASS',    '');
+define('DB_NAME',    'calendario');
+define('DB_CHARSET', 'utf8mb4');
 
 date_default_timezone_set('America/Bogota');
 
 function conectar(): PDO {
     $dsn = sprintf('mysql:host=%s;dbname=%s;charset=%s', DB_HOST, DB_NAME, DB_CHARSET);
-    $pdo = new PDO($dsn, DB_USER, DB_PASS, [
+    return new PDO($dsn, DB_USER, DB_PASS, [
         PDO::ATTR_ERRMODE            => PDO::ERRMODE_EXCEPTION,
         PDO::ATTR_DEFAULT_FETCH_MODE => PDO::FETCH_ASSOC,
         PDO::ATTR_EMULATE_PREPARES   => false,
     ]);
-    // Sincronizar zona horaria de MySQL con PHP (America/Bogota = UTC-5)
-    $pdo->exec("SET time_zone = '-05:00'");
-    return $pdo;
 }
 
 function responder(mixed $datos, bool $ok = true, int $codigo = 200): never {
@@ -46,4 +39,5 @@ function requerir(array $datos, string ...$campos): void {
     }
 }
 
+if (session_status() === PHP_SESSION_NONE) session_start();
 if ($_SERVER['REQUEST_METHOD'] === 'OPTIONS') { http_response_code(204); exit; }

@@ -1,244 +1,74 @@
-<!doctype html>
+<!DOCTYPE html>
 <html lang="es">
 <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Gestión de Actividades</title>
-
-    <style>
-    body {
-        margin: 0;
-        font-family: Arial, Helvetica, sans-serif;
-        background-color: #f5f5f5;
-    }
-
-    .header {
-        background-color: #7b0d0d;
-        color: white;
-        padding: 18px 25px;
-        font-size: 22px;
-        font-weight: bold;
-    }
-
-    .main-title {
-        text-align: center;
-        font-size: 30px;
-        margin: 30px 0;
-        font-weight: bold;
-    }
-
-    .container {
-        width: 90%;
-        margin: auto;
-        display: grid;
-        grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
-        gap: 25px;
-    }
-
-    .card {
-        background: #ffffff;
-        border-radius: 12px;
-        padding: 25px;
-        box-shadow: 0 3px 8px rgba(0, 0, 0, 0.15);
-    }
-
-    .card h3 {
-        margin-top: 0;
-        display: flex;
-        align-items: center;
-        gap: 10px;
-        font-size: 22px;
-        font-weight: bold;
-    }
-
-    .input-group {
-        margin-top: 12px;
-    }
-
-    .input-group label {
-        font-size: 14px;
-        color: #444;
-    }
-
-    .input-group input,
-    .input-group textarea {
-        width: 100%;
-        padding: 10px;
-        border-radius: 8px;
-        border: 1px solid #ccc;
-        margin-top: 4px;
-    }
-
-    textarea {
-        resize: none;
-        height: 70px;
-    }
-
-    button {
-        background-color: #7b0d0d;
-        color: white;
-        padding: 10px 16px;
-        border: none;
-        border-radius: 8px;
-        cursor: pointer;
-        width: 100%;
-        margin-top: 10px;
-        font-size: 15px;
-    }
-
-    button:hover {
-        background-color: #5c0a0a;
-    }
-
-    .activity-card {
-        background: #fff;
-        padding: 18px;
-        border-radius: 10px;
-        box-shadow: 0 2px 6px rgba(0, 0, 0, 0.15);
-        margin-top: 15px;
-    }
-
-    .activity-card p {
-        margin: 4px 0;
-    }
-
-    .inline-btns {
-        display: flex;
-        gap: 10px;
-        margin-top: 12px;
-    }
-
-    .edit-btn {
-        background: #004c97;
-    }
-
-    .edit-btn:hover {
-        background: #003b75;
-    }
-
-    .delete-btn {
-        background: #9e0000;
-    }
-
-    .delete-btn:hover {
-        background: #750000;
-    }
-    </style>
+  <meta charset="UTF-8" /><title>Gestión de Actividades</title>
+  <style>
+    body { margin:0; font-family:Arial,sans-serif; background:#f5f5f5; }
+    .header { background:#7b0d0d; color:#fff; padding:18px 25px; font-size:22px; font-weight:bold; }
+    .main-title { text-align:center; font-size:26px; margin:24px 0; font-weight:bold; }
+    .container { width:90%; margin:auto; display:grid;
+                 grid-template-columns:repeat(auto-fit,minmax(320px,1fr)); gap:22px; }
+    .card { background:#fff; border-radius:12px; padding:24px; box-shadow:0 3px 8px rgba(0,0,0,.13); }
+    .card h3 { margin-top:0; font-size:18px; }
+    .input-group { margin-top:10px; }
+    .input-group label { font-size:13px; color:#444; display:block; margin-bottom:2px; }
+    .input-group input, .input-group textarea, .input-group select {
+      width:100%; padding:9px; border-radius:7px; border:1px solid #ccc;
+      box-sizing:border-box; font-size:14px; }
+    textarea { resize:none; height:65px; }
+    button { background:#7b0d0d; color:#fff; padding:10px; border:none; border-radius:7px;
+             cursor:pointer; width:100%; margin-top:9px; font-size:14px; }
+    button:hover { background:#5c0a0a; }
+    .activity-card { background:#fff; padding:15px; border-radius:9px;
+                     box-shadow:0 2px 5px rgba(0,0,0,.12); margin-top:12px; }
+    .activity-card p { margin:3px 0; font-size:.87em; }
+    .activity-card select { padding:3px; border-radius:4px; font-size:.83em; }
+    .inline-btns { display:flex; gap:8px; margin-top:9px; }
+    .inline-btns button { flex:1; width:auto; }
+    .edit-btn   { background:#004c97; } .edit-btn:hover   { background:#003b75; }
+    .delete-btn { background:#9e0000; } .delete-btn:hover { background:#750000; }
+    .row-2 { display:grid; grid-template-columns:1fr 1fr; gap:8px; }
+    .back-btn { display:inline-block; margin:14px 24px; background:#333; color:#fff;
+                padding:7px 15px; border-radius:6px; text-decoration:none; font-size:.9em; }
+  </style>
 </head>
-
 <body>
-    <div class="header">Página Principal – Rol: Administrador</div>
-
-    <div class="main-title">Gestión de Actividades</div>
-
-    <div class="container">
-    <!-- CREAR ACTIVIDAD -->
+  <div class="header">Página Principal – Rol: Administrador</div>
+  <a class="back-btn" href="administrador.html">← Volver</a>
+  <div class="main-title">Gestión de Actividades</div>
+  <div class="container">
     <div class="card">
-        <h3>📝 Crear Actividad Repetitiva</h3>
-
-        <div class="input-group">
-        <label>Nombre de la Actividad</label>
-        <input type="text" id="nombre" />
-        </div>
-
-        <div class="input-group">
-        <label>Descripción</label>
-        <textarea id="descripcion"></textarea>
-        </div>
-
-        <div class="input-group">
-        <label>Fecha de Inicio</label>
-        <input type="date" id="inicio" />
-        </div>
-
-        <div class="input-group">
-        <label>Fecha Final</label>
-        <input type="date" id="fin" />
-        </div>
-
-        <button onclick="crearActividad()">Crear Actividad</button>
+      <h3>📝 Crear / Editar Actividad</h3>
+      <div class="input-group"><label>Nombre *</label><input type="text" id="nombre" /></div>
+      <div class="input-group"><label>Descripción</label><textarea id="descripcion"></textarea></div>
+      <div class="row-2">
+        <div class="input-group"><label>Fecha Inicio *</label><input type="date" id="inicio" /></div>
+        <div class="input-group"><label>Fecha Fin</label>    <input type="date" id="fin"    /></div>
+      </div>
+      <div class="row-2">
+        <div class="input-group"><label>Hora Inicio</label><input type="time" id="hora_inicio" /></div>
+        <div class="input-group"><label>Hora Fin</label>   <input type="time" id="hora_fin"    /></div>
+      </div>
+      <div class="input-group"><label>Lugar</label><input type="text" id="lugar" /></div>
+      <div class="input-group">
+        <label>Tipo</label>
+        <select id="tipo">
+          <option value="Cultural">Cultural</option>
+          <option value="Academica">Académica</option>
+          <option value="Ludica">Lúdica</option>
+        </select>
+      </div>
+      <div class="input-group">
+        <label><input type="checkbox" id="es_repetitiva" style="width:auto;margin-right:5px" />
+        Actividad repetitiva</label>
+      </div>
+      <button id="btn-crear" onclick="crearActividad()">Crear Actividad</button>
     </div>
-
-    <!-- ACTIVIDADES -->
     <div class="card">
-        <h3>📅 Actividades Repetitivas Registradas</h3>
-        <div id="lista"></div>
+      <h3>📅 Actividades Registradas</h3>
+      <div id="lista"><p>Cargando...</p></div>
     </div>
-    </div>
-
-    <script>
-    let actividades = [];
-    let editIndex = null;
-
-    function crearActividad() {
-        let act = {
-        nombre: document.getElementById("nombre").value,
-        descripcion: document.getElementById("descripcion").value,
-        tipo: "Repetitiva",
-        inicio: document.getElementById("inicio").value,
-        fin: document.getElementById("fin").value,
-        };
-
-        if (!act.nombre || !act.inicio) {
-        alert("Complete al menos nombre y fecha de inicio.");
-        return;
-        }
-
-        if (editIndex === null) {
-        actividades.push(act);
-        } else {
-        actividades[editIndex] = act;
-        editIndex = null;
-        }
-
-        limpiarCampos();
-        mostrarActividades();
-    }
-
-    function limpiarCampos() {
-        document.getElementById("nombre").value = "";
-        document.getElementById("descripcion").value = "";
-        document.getElementById("inicio").value = "";
-        document.getElementById("fin").value = "";
-    }
-
-    function mostrarActividades() {
-        let cont = document.getElementById("lista");
-        cont.innerHTML = "";
-
-        actividades.forEach((a, i) => {
-        cont.innerHTML += `
-        <div class="activity-card">
-        <p><strong>Actividad:</strong> ${a.nombre}</p>
-        <p><strong>Descripción:</strong> ${a.descripcion}</p>
-        <p><strong>Tipo:</strong> ${a.tipo}</p>
-        <p><strong>Inicio:</strong> ${a.inicio}</p>
-        <p><strong>Fin:</strong> ${a.fin}</p>
-
-        <div class="inline-btns">
-            <button class="edit-btn" onclick="editarActividad(${i})">Editar</button>
-            <button class="delete-btn" onclick="eliminarActividad(${i})">Eliminar</button>
-        </div>
-        </div>
-    `;
-        });
-    }
-
-    function editarActividad(i) {
-        let a = actividades[i];
-
-        document.getElementById("nombre").value = a.nombre;
-        document.getElementById("descripcion").value = a.descripcion;
-        document.getElementById("inicio").value = a.inicio;
-        document.getElementById("fin").value = a.fin;
-
-        editIndex = i;
-    }
-
-    function eliminarActividad(i) {
-        actividades.splice(i, 1);
-        mostrarActividades();
-    }
-    </script>
+  </div>
+  <script src="../js/gestionactiad.js"></script>
 </body>
 </html>

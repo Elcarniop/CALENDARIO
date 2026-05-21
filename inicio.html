@@ -1,136 +1,45 @@
 <!DOCTYPE html>
 <html lang="es">
 <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Iniciar Sesión - Vive el Campus</title>
-
-    <style>
-    body {
-        margin: 0;
-        background-color: #d3d3d3;
-        font-family: "Arial Black", sans-serif;
-        display: flex;
-        justify-content: center;
-        align-items: center;
-        height: 100vh;
-    }
-
-    .login-box {
-        background: white;
-        width: 360px;
-        padding: 30px;
-        border-radius: 18px;
-        border: 2px solid #b50303;
-        box-shadow: 0 0 25px rgba(181, 3, 3, 0.4);
-        position: relative;
-        text-align: center;
-    }
-
-    .close-btn {
-        position: absolute;
-        right: 15px;
-        top: 15px;
-        width: 28px;
-        height: 28px;
-        background: #b50303;
-        color: white;
-        border-radius: 50%;
-        display: flex;
-        justify-content: center;
-        align-items: center;
-        font-weight: bold;
-        cursor: pointer;
-        font-size: 1rem;
-    }
-
-    .logo {
-        font-size: 1.4rem;
-        color: #b50303;
-        font-weight: bold;
-        margin-bottom: 10px;
-    }
-
-    h2 {
-        font-size: 1.6rem;
-        margin-bottom: 15px;
-        font-weight: bold;
-    }
-
-    label {
-        display: block;
-        text-align: left;
-        margin-top: 15px;
-        font-size: 0.9rem;
-        font-weight: bold;
-    }
-
-    input {
-        width: 100%;
-        padding: 10px;
-        margin-top: 5px;
-        font-size: 1rem;
-        border: 2px solid #c9c9c9;
-        border-radius: 5px;
-        outline: none;
-    }
-
-    .btn-ingresar {
-        margin-top: 20px;
-        width: 60%;
-        padding: 10px;
-        background: #b50303;
-        border: none;
-        color: white;
-        font-size: 1rem;
-        font-weight: bold;
-        border-radius: 5px;
-        cursor: pointer;
-    }
-
-    .btn-ingresar:hover {
-        background-color: #d41717;
-    }
-
-    .forgot a {
-        margin-top: 15px;
-        font-size: 0.85rem;
-        color: #b50303;
-        text-decoration: none;
-        display: inline-block;
-    }
-    </style>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Iniciar Sesión – Vive el Campus</title>
+  <style>
+    body { margin:0; background:#d3d3d3; font-family:"Arial Black",sans-serif;
+           display:flex; justify-content:center; align-items:center; height:100vh; }
+    .login-box { background:#fff; width:360px; padding:30px; border-radius:18px;
+                 border:2px solid #b50303; box-shadow:0 0 25px rgba(181,3,3,.4);
+                 position:relative; text-align:center; }
+    .close-btn { position:absolute; right:15px; top:15px; width:28px; height:28px;
+                 background:#b50303; color:#fff; border-radius:50%; display:flex;
+                 justify-content:center; align-items:center; font-weight:bold;
+                 cursor:pointer; font-size:1rem; text-decoration:none; }
+    .logo { font-size:1.4rem; color:#b50303; font-weight:bold; margin-bottom:10px; }
+    h2    { font-size:1.6rem; margin-bottom:15px; }
+    label { display:block; text-align:left; margin-top:15px;
+            font-size:.9rem; font-weight:bold; }
+    input { width:100%; padding:10px; margin-top:5px; font-size:1rem;
+            border:2px solid #c9c9c9; border-radius:5px; outline:none; box-sizing:border-box; }
+    .btn-ingresar { margin-top:20px; width:60%; padding:10px; background:#b50303;
+                    border:none; color:#fff; font-size:1rem; font-weight:bold;
+                    border-radius:5px; cursor:pointer; }
+    .btn-ingresar:hover { background:#d41717; }
+    #error-msg { display:none; margin-top:12px; color:#b50303;
+                 background:#fde8e8; padding:8px; border-radius:6px; font-size:.88rem; }
+  </style>
 </head>
-
 <body>
-    <div class="login-box">
-    <div class="close-btn" onclick="window.location.href='index.html'">X</div>
+  <div class="login-box">
+    <a class="close-btn" href="../index.html">✕</a>
     <div class="logo">VIVE EL CAMPUS</div>
     <h2>INICIAR SESIÓN</h2>
-
     <label>USUARIO</label>
-    <input type="text" id="usuario" />
-
+    <input type="text" id="usuario" autocomplete="username" />
     <label>CONTRASEÑA</label>
-    <input type="password" id="contrasena" />
-
-    <button class="btn-ingresar" onclick="validarLogin()">INGRESA</button>
-    </div>
-
-    <script>
-    function validarLogin() {
-        const usuario = document.getElementById("usuario").value;
-        const contrasena = document.getElementById("contrasena").value;
-
-        // Validación simple de usuarios
-        if (usuario === "admin" && contrasena === "admin123") {
-        window.location.href = "administrador.html";
-        } else if (usuario === "oficina" && contrasena === "oficina123") {
-        window.location.href = "oficina.html";
-        } else {
-        alert("Usuario o contraseña incorrectos");
-        }
-    }
-    </script>
+    <input type="password" id="contrasena" autocomplete="current-password" />
+    <div id="error-msg"></div>
+    <button class="btn-ingresar" onclick="validarLogin()">INGRESAR</button>
+  </div>
+  <script src="../js/inicio.js"></script>
 </body>
 </html>

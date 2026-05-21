@@ -1,88 +1,65 @@
 <!DOCTYPE html>
 <html lang="es">
 <head>
-    <meta charset="UTF-8" />
-    <title>Registro de Actividades</title>
-    <style>
-    body {
-        font-family: Arial;
-        background: #f5f5f5;
-        margin: 0;
-        padding: 20px;
-    }
-
-    .header {
-        background: #7b0d0d;
-        padding: 18px;
-        color: white;
-        font-size: 22px;
-        font-weight: bold;
-    }
-
-    .container {
-        background: white;
-        max-width: 600px;
-        margin: 25px auto;
-        padding: 25px;
-        border-radius: 12px;
-        box-shadow: 0px 3px 8px rgba(0, 0, 0, 0.2);
-    }
-
-    label {
-        font-weight: bold;
-        margin-top: 12px;
-        display: block;
-    }
-
-    input,
-    textarea {
-        width: 100%;
-        padding: 10px;
-        margin-top: 6px;
-        border-radius: 6px;
-        border: 1px solid #ccc;
-    }
-
-    button {
-        margin-top: 20px;
-        padding: 12px;
-        width: 100%;
-        background: #7b0d0d;
-        color: white;
-        border: none;
-        font-size: 18px;
-        border-radius: 10px;
-        cursor: pointer;
-    }
-
-    button:hover {
-        background: #5e0a0a;
-    }
-    </style>
+  <meta charset="UTF-8" /><title>Registro de Actividades</title>
+  <style>
+    body { font-family:Arial; background:#f5f5f5; margin:0; padding:20px; }
+    .header { background:#7b0d0d; padding:18px; color:#fff;
+              font-size:22px; font-weight:bold; margin:-20px -20px 0; }
+    .container { background:#fff; max-width:620px; margin:25px auto; padding:25px;
+                 border-radius:12px; box-shadow:0 3px 8px rgba(0,0,0,.2); }
+    label { font-weight:bold; margin-top:12px; display:block; }
+    input, textarea, select { width:100%; padding:10px; margin-top:5px; border-radius:6px;
+                               border:1px solid #ccc; box-sizing:border-box; font-size:14px; }
+    textarea { resize:vertical; height:80px; }
+    .row-2 { display:grid; grid-template-columns:1fr 1fr; gap:12px; }
+    button { margin-top:18px; padding:12px; width:100%; background:#7b0d0d; color:#fff;
+             border:none; font-size:16px; border-radius:9px; cursor:pointer; }
+    button:hover { background:#5e0a0a; }
+    #error-msg { display:none; margin-top:10px; color:#b50303;
+                 background:#fde8e8; padding:10px; border-radius:6px; font-size:.88em; }
+    .aviso { background:#fff3cd; border-left:4px solid #f0ad4e; padding:10px;
+             border-radius:6px; font-size:.87em; margin-bottom:12px; }
+    .back-btn { display:inline-block; margin:14px 0; background:#333; color:#fff;
+                padding:7px 15px; border-radius:6px; text-decoration:none; font-size:.9em; }
+  </style>
 </head>
-
 <body>
-    <div class="header">Registro de Actividades</div>
-
-    <div class="container">
-    <form action="actividades.html" method="GET">
-        <label>Nombre de la Actividad</label>
-        <input type="text" name="nombre" required />
-
-        <label>Descripción de la Actividad</label>
-        <textarea name="descripcion" rows="4" required></textarea>
-
-        <label>Fecha de Inicio</label>
-        <input type="date" name="inicio" required />
-
-        <label>Fecha de Terminación</label>
-        <input type="date" name="fin" required />
-
-        <label>Lugar</label>
-        <input type="text" name="lugar" required />
-
-        <button type="submit">Guardar Actividad</button>
+  <div class="header">Registro de Actividades</div>
+  <div class="container">
+    <a class="back-btn" href="oficina.html">← Volver</a>
+    <div class="aviso">⚠️ Solo puede registrar actividades con al menos <strong>24 horas</strong> de anticipación.</div>
+    <form id="form-registro">
+      <label>Nombre *</label>
+      <input type="text" id="nombre" required />
+      <label>Descripción *</label>
+      <textarea id="descripcion" required></textarea>
+      <div class="row-2">
+        <div><label>Fecha Inicio *</label><input type="date" id="fecha_inicio" required /></div>
+        <div><label>Fecha Fin *</label>   <input type="date" id="fecha_fin"    required /></div>
+      </div>
+      <div class="row-2">
+        <div><label>Hora Inicio *</label><input type="time" id="hora_inicio" required /></div>
+        <div><label>Hora Fin *</label>   <input type="time" id="hora_fin"    required /></div>
+      </div>
+      <label>Lugar *</label>
+      <input type="text" id="lugar" required />
+      <label>Dependencia</label>
+      <input type="text" id="dependencia" />
+      <label>Tipo *</label>
+      <select id="tipo" required>
+        <option value="Cultural">Cultural</option>
+        <option value="Academica">Académica</option>
+        <option value="Ludica">Lúdica</option>
+      </select>
+      <label style="font-weight:normal;margin-top:12px">
+        <input type="checkbox" id="es_repetitiva" style="width:auto;margin-right:6px" />
+        Actividad repetitiva
+      </label>
+      <div id="error-msg"></div>
+      <button type="submit">Guardar Actividad</button>
     </form>
-    </div>
+  </div>
+  <script src="../js/registro.js"></script>
 </body>
 </html>

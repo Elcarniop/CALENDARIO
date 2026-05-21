@@ -1,294 +1,85 @@
 <!DOCTYPE html>
 <html lang="es">
 <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Generación de Informes</title>
-
-    <style>
-    body {
-        margin: 0;
-        font-family: Arial, Helvetica, sans-serif;
-        background-color: #f5f5f5;
+  <meta charset="UTF-8" /><title>Generación de Informes</title>
+  <style>
+    body { margin:0; font-family:Arial,sans-serif; background:#f5f5f5; }
+    .header { background:#7b0d0d; color:#fff; padding:18px 25px; font-size:22px; font-weight:bold; }
+    .main-title { text-align:center; font-size:26px; margin:24px 0; font-weight:bold; }
+    .container { width:90%; margin:auto; display:grid;
+                 grid-template-columns:repeat(auto-fit,minmax(320px,1fr)); gap:22px; }
+    .card { background:#fff; border-radius:12px; padding:24px; box-shadow:0 3px 8px rgba(0,0,0,.13); }
+    .card h3 { margin-top:0; font-size:18px; }
+    .input-group { margin-top:10px; }
+    .input-group label { font-size:13px; color:#444; display:block; margin-bottom:2px; }
+    .input-group input, .input-group select {
+      width:100%; padding:9px; border-radius:7px;
+      border:1px solid #ccc; box-sizing:border-box; }
+    button { background:#7b0d0d; color:#fff; padding:10px; border:none; border-radius:7px;
+             cursor:pointer; width:100%; margin-top:9px; font-size:14px; }
+    button:hover { background:#5c0a0a; }
+    .report-card { background:#f9f9f9; padding:13px; border-radius:8px;
+                   box-shadow:0 1px 4px rgba(0,0,0,.1); margin-top:11px; }
+    .report-card p { margin:3px 0; font-size:.86em; }
+    .inline-btns { display:flex; gap:8px; margin-top:11px; flex-wrap:wrap; }
+    .inline-btns button { flex:1; min-width:80px; width:auto; }
+    .export-btn { background:#004c97; } .export-btn:hover { background:#003b75; }
+    .hist-btn   { background:#555; }
+    .back-btn { display:inline-block; margin:14px 24px; background:#333; color:#fff;
+                padding:7px 15px; border-radius:6px; text-decoration:none; font-size:.9em; }
+    @media print {
+      .header,.back-btn,.inline-btns,.input-group,button { display:none !important; }
     }
-
-    .header {
-        background-color: #7b0d0d;
-        color: white;
-        padding: 18px 25px;
-        font-size: 22px;
-        font-weight: bold;
-    }
-
-    .main-title {
-        text-align: center;
-        font-size: 30px;
-        margin: 30px 0;
-        font-weight: bold;
-    }
-
-    .container {
-        width: 90%;
-        margin: auto;
-        display: grid;
-        grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
-        gap: 25px;
-    }
-
-    .card {
-        background: #ffffff;
-        border-radius: 12px;
-        padding: 25px;
-        box-shadow: 0 3px 8px rgba(0, 0, 0, 0.15);
-    }
-
-    .card h3 {
-        margin-top: 0;
-        display: flex;
-        align-items: center;
-        gap: 10px;
-        font-size: 22px;
-        font-weight: bold;
-    }
-
-    .input-group {
-        margin-top: 12px;
-    }
-
-    .input-group label {
-        font-size: 14px;
-        color: #444;
-    }
-
-    .input-group input,
-    .input-group select {
-        width: 100%;
-        padding: 10px;
-        border-radius: 8px;
-        border: 1px solid #ccc;
-        margin-top: 4px;
-    }
-
-    button {
-        background-color: #7b0d0d;
-        color: white;
-        padding: 10px 16px;
-        border: none;
-        border-radius: 8px;
-        cursor: pointer;
-        width: 100%;
-        margin-top: 10px;
-        font-size: 15px;
-    }
-
-    button:hover {
-        background-color: #5c0a0a;
-    }
-
-    .report-card {
-        background: #fff;
-        padding: 18px;
-        border-radius: 10px;
-        box-shadow: 0 2px 6px rgba(0, 0, 0, 0.15);
-        margin-top: 15px;
-    }
-
-    .report-card p {
-        margin: 4px 0;
-        font-size: 14px;
-    }
-
-    .inline-btns {
-        display: flex;
-        gap: 10px;
-        margin-top: 10px;
-    }
-
-    .export-btn {
-        background-color: #004c97;
-    }
-
-    .export-btn:hover {
-        background-color: #003b75;
-    }
-    </style>
+  </style>
 </head>
-
 <body>
-    <div class="header">Página Principal – Rol: Administrador</div>
-
-    <div class="main-title">Generación de Informes de Actividades</div>
-
-    <div class="container">
-    <!-- FILTROS -->
+  <div class="header">Página Principal – Rol: Administrador</div>
+  <a class="back-btn" href="administrador.html">← Volver</a>
+  <div class="main-title">Generación de Informes</div>
+  <div class="container">
     <div class="card">
-        <h3>🔍 Filtros de Actividades</h3>
-
-        <div class="input-group">
-        <label>Estado de la Actividad</label>
+      <h3>🔍 Filtros</h3>
+      <div class="input-group">
+        <label>Estado</label>
         <select id="estado">
-            <option value="pendiente">Pendiente de Validación</option>
-            <option value="aprobada">Aprobada</option>
-            <option value="actualizada">Actualizada</option>
+          <option value="">Todos</option>
+          <option value="pendiente">Pendiente</option>
+          <option value="aprobada">Aprobada</option>
+          <option value="actualizada">Actualizada</option>
         </select>
-        </div>
-
-        <div class="input-group">
-        <label>Tipo de Actividad</label>
+      </div>
+      <div class="input-group">
+        <label>Tipo</label>
         <select id="tipo">
-            <option value="Cultural">Cultural</option>
-            <option value="Académica">Académica</option>
-            <option value="Lúdica">Lúdica</option>
-            <option value="Repetitiva">Repetitiva</option>
+          <option value="">Todos</option>
+          <option value="Cultural">Cultural</option>
+          <option value="Academica">Académica</option>
+          <option value="Ludica">Lúdica</option>
         </select>
-        </div>
-
-        <div class="input-group">
-        <label>Oficina</label>
-        <input type="text" id="oficina" placeholder="Nombre de la oficina" />
-        </div>
-
-        <div class="input-group">
-        <label>Descripción</label>
-        <input
-            type="text"
-            id="descripcionFiltro"
-            placeholder="Texto en la descripción"
-        />
-        </div>
-
-        <div class="input-group">
-        <label>Fecha Inicio</label>
-        <input type="date" id="fechaInicio" />
-        </div>
-
-        <div class="input-group">
-        <label>Fecha Fin</label>
-        <input type="date" id="fechaFin" />
-        </div>
-
-        <button onclick="generarInforme()">Generar Informe</button>
+      </div>
+      <div class="input-group"><label>Oficina</label>
+        <input type="text" id="oficina" placeholder="Nombre parcial" /></div>
+      <div class="input-group"><label>Descripción contiene</label>
+        <input type="text" id="descripcionFiltro" /></div>
+      <div class="input-group"><label>Fecha desde</label>
+        <input type="date" id="fechaInicio" /></div>
+      <div class="input-group"><label>Fecha hasta</label>
+        <input type="date" id="fechaFin" /></div>
+      <button onclick="generarInforme()">📊 Generar Informe</button>
+      <div class="inline-btns" style="margin-top:12px">
+        <button id="btn-historial" class="hist-btn">🕓 Historial (RF20)</button>
+      </div>
     </div>
-
-    <!-- RESULTADOS DEL INFORME -->
     <div class="card">
-        <h3>📄 Informe Generado</h3>
-        <div id="resultados"></div>
-
-        <div class="inline-btns">
-        <button class="export-btn" onclick="exportar('PDF')">
-            Exportar PDF
-        </button>
-        <button class="export-btn" onclick="exportar('Excel')">
-            Exportar Excel
-        </button>
-        <button class="export-btn" onclick="exportar('CSV')">
-            Exportar CSV
-        </button>
-        </div>
+      <h3>📄 Informe Generado</h3>
+      <div id="resultados"><p style="color:#888">Aplique filtros y presione Generar.</p></div>
+      <div class="inline-btns">
+        <button class="export-btn" onclick="exportar('PDF')">📥 PDF</button>
+        <button class="export-btn" onclick="exportar('Excel')">📥 Excel</button>
+        <button class="export-btn" onclick="exportar('CSV')">📥 CSV</button>
+      </div>
     </div>
-    </div>
-
-    <script>
-      // Datos de ejemplo
-    const actividades = [
-        {
-        nombre: "Taller de Teatro",
-        descripcion: "Práctica de expresión artística",
-        lugar: "Auditorio Central",
-        responsable: "Oficina de Cultura",
-        tipo: "Cultural",
-        repetitiva: true,
-        inicio: "2025-11-20",
-        fin: "2025-11-25",
-        estado: "pendiente",
-        },
-        {
-        nombre: "Conferencia de Matemáticas",
-        descripcion: "Charla sobre geometría avanzada",
-        lugar: "Aula Magna",
-        responsable: "Departamento Académico",
-        tipo: "Académica",
-        repetitiva: false,
-        inicio: "2025-11-21",
-        fin: "2025-11-21",
-        estado: "aprobada",
-        },
-        {
-        nombre: "Jornada Deportiva",
-        descripcion: "Actividades recreativas y lúdicas",
-        lugar: "Cancha Principal",
-        responsable: "Oficina de Deportes",
-        tipo: "Lúdica",
-        repetitiva: true,
-        inicio: "2025-11-22",
-        fin: "2025-11-29",
-        estado: "actualizada",
-        },
-    ];
-
-    function generarInforme() {
-        const estado = document.getElementById("estado").value;
-        const tipo = document.getElementById("tipo").value;
-        const oficina = document.getElementById("oficina").value.toLowerCase();
-        const descripcionFiltro = document
-        .getElementById("descripcionFiltro")
-        .value.toLowerCase();
-        const fechaInicio = document.getElementById("fechaInicio").value;
-        const fechaFin = document.getElementById("fechaFin").value;
-
-        const resultados = actividades.filter((a) => {
-        const coincideEstado = a.estado === estado;
-        const coincideTipo = a.tipo === tipo;
-        const coincideOficina = oficina
-            ? a.responsable.toLowerCase().includes(oficina)
-            : true;
-        const coincideDescripcion = descripcionFiltro
-            ? a.descripcion.toLowerCase().includes(descripcionFiltro)
-            : true;
-        const coincideFecha =
-            (!fechaInicio || a.inicio >= fechaInicio) &&
-            (!fechaFin || a.fin <= fechaFin);
-        return (
-            coincideEstado &&
-            coincideTipo &&
-            coincideOficina &&
-            coincideDescripcion &&
-            coincideFecha
-        );
-        });
-
-        const cont = document.getElementById("resultados");
-        cont.innerHTML = "";
-
-        if (resultados.length === 0) {
-        cont.innerHTML =
-            "<p>No se encontraron actividades que cumplan con los filtros.</p>";
-        return;
-        }
-
-        resultados.forEach((a) => {
-        cont.innerHTML += `
-                <div class="report-card">
-                    <p><strong>Actividad:</strong> ${a.nombre}</p>
-                    <p><strong>Descripción:</strong> ${a.descripcion}</p>
-                    <p><strong>Lugar:</strong> ${a.lugar}</p>
-                    <p><strong>Responsable:</strong> ${a.responsable}</p>
-                    <p><strong>Tipo:</strong> ${a.tipo}</p>
-                    <p><strong>Repetitiva:</strong> ${
-                    a.repetitiva ? "Sí" : "No"
-                    }</p>
-                    <p><strong>Inicio:</strong> ${a.inicio}</p>
-                    <p><strong>Fin:</strong> ${a.fin}</p>
-                    <p><strong>Estado:</strong> ${a.estado}</p>
-                </div>
-            `;
-        });
-    }
-
-    function exportar(formato) {
-        alert(`Informe exportado en formato ${formato} (simulado).`);
-    }
-    </script>
+  </div>
+  <script src="../js/informesadministr.js"></script>
 </body>
 </html>
